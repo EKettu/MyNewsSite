@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Add News</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    </head>
+    <body>
+
+        <div>
+           
+            Enter title etc<br/>
+            <form action="/news" th:method="POST" th:object="${newsItem}">
+                Title: <input type="text" name="title" id="title"/><br/>
+                Ingress: <input type="text" name="ingress" id="ingress"/><br/>
+                Text: <input type="text" name="text" id="text" /><br/>
+                Category: <input type="text" name="category" id="category"/><br/>
+                Writers: <input type="text" name="writers" id="writers"/><br/>
+                <input type="submit"/>            
+            </form>
+            
+             </div>
+    </body> 
+
+</html>
+
+
+

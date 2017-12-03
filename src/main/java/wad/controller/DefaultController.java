@@ -8,7 +8,7 @@ public class DefaultController {
 
     @GetMapping("*")
     public String handleDefault() {
-        return "index";
+        return "news";
     }
 
 }
