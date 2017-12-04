@@ -16,7 +16,7 @@
 
         <h2>Current news</h2>
         
-         <ol>
+         <ul>
             <li th:each="newsItem : ${selectednews}">
                 <a th:href="@{/newsItem/{newsItemId}(newsItemId=${newsItem.id})}" >
                     <span th:text="${newsItem.title + ' ' + newsItem.newsDate}">title and date</span>
@@ -24,16 +24,16 @@
                 </a> 
 
             </li>
-        </ol>
+        </ul>
 
-        <ol>
+        <ul>
             <li th:each="newsItem : ${oldernews}">
                 <a th:href="@{/newsItem/{newsItemId}(newsItemId=${newsItem.id})}" >
                     <span th:text="${newsItem.title + ' ' + newsItem.newsDate}">title and date</span>
                 </a> 
 
             </li>
-        </ol>
+        </ul>
 
     </body>
 </html>

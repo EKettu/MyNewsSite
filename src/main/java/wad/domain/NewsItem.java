@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
@@ -28,6 +29,9 @@ public class NewsItem extends AbstractPersistable<Long> {
     @CollectionTable(name = "writers")
     private List<String> writers;
 
+    @OneToOne(fetch = FetchType.EAGER)
+    private FileObject picture;
+
     private String category;
 
     private LocalDate newsDate;
@@ -43,16 +47,14 @@ public class NewsItem extends AbstractPersistable<Long> {
     public void setNewsDate(LocalDate newsDate) {
         this.newsDate = newsDate;
     }
-//    
-//    private FileObject picture;
-//
-//    public FileObject getPicture() {
-//        return picture;
-//    }
-//
-//    public void setPicture(FileObject picture) {
-//        this.picture = picture;
-//    }
+
+    public FileObject getPicture() {
+        return picture;
+    }
+
+    public void setPicture(FileObject picture) {
+        this.picture = picture;
+    }
 
     public String getCategory() {
         return category;
@@ -103,33 +105,6 @@ public class NewsItem extends AbstractPersistable<Long> {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    /**
-     * Method to transfer writers from a list into a String
-     *
-     * @return writers as a String
-     */
-    public String authorsToString() {
-        String output = "";
-        int length = this.writers.size();
-
-        if (length == 1) {
-            output = this.writers.get(0);
-        }
-
-        if (length == 2) {
-            output = this.writers.get(0) + " and " + this.writers.get(1);
-        }
-
-        if (length > 2) {
-            for (int i = 0; i < length - 1; i++) {
-                output = output + this.writers.get(i) + ", ";
-            }
-            output = output + "and " + this.writers.get(length - 1);
-        }
-
-        return output;
     }
 
 }

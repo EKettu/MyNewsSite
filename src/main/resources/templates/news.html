@@ -11,12 +11,13 @@
         <div>
            
             Enter title etc<br/>
-            <form action="/news" th:method="POST" th:object="${newsItem}">
+            <form action="/news" th:method="POST" enctype = "multipart/form-data">
                 Title: <input type="text" name="title" id="title"/><br/>
                 Ingress: <input type="text" name="ingress" id="ingress"/><br/>
-                Text: <input type="text" name="text" id="text" /><br/>
+                Text: <textarea name="text" id="text" ></textarea><br/>
                 Category: <input type="text" name="category" id="category"/><br/>
                 Writers: <input type="text" name="writers" id="writers"/><br/>
+                Picture: <input type="file" name="file" id="file"/><br/>
                 <input type="submit"/>            
             </form>
             

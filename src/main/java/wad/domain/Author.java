@@ -1,10 +1,9 @@
+
 package wad.domain;
 
-import javax.persistence.Basic;
+import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,15 +13,8 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @AllArgsConstructor
 @Data
 @Entity
-public class FileObject extends AbstractPersistable<Long> {
+public class Author extends AbstractPersistable<Long>  {
 
-    private String name;
-    private String contentType;
-    private Long contentLength;
-
-    @Lob
-    @Basic(fetch = FetchType.LAZY)
-    private byte[] content;
     @Id
     private Long id;
 
@@ -33,4 +25,9 @@ public class FileObject extends AbstractPersistable<Long> {
     public void setId(Long id) {
         this.id = id;
     }
+    
+   private String name;
+//    
+//    private List <NewsItem> newsList;
+    
 }
