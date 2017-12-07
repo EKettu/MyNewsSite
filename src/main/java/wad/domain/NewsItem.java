@@ -36,6 +36,17 @@ public class NewsItem extends AbstractPersistable<Long> {
 
     @ManyToMany
     private List<Category> categories;
+    
+     @ManyToMany(mappedBy="news")
+    private List<Author> authors;
+
+    public List<Author> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(List<Author> authors) {
+        this.authors = authors;
+    }
 
     private LocalDate newsDate;
 
