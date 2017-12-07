@@ -19,7 +19,7 @@ public class NewsItem extends AbstractPersistable<Long> {
     @Column
     private String title;
 
-    @Column
+    @Column(length = 3000)
     private String text;
 
     @Column
@@ -34,10 +34,21 @@ public class NewsItem extends AbstractPersistable<Long> {
 
     private String category;
 
+    @ManyToMany
+    private List<Category> categories;
+
     private LocalDate newsDate;
 
     public NewsItem() {
         this.newsDate = LocalDate.now();
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
     }
 
     public LocalDate getNewsDate() {
