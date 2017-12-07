@@ -29,6 +29,6 @@ public class Author extends AbstractPersistable<Long> {
     private String name;
 
     @ManyToMany
-    private List<NewsItem> news;
+    private List<Newsitem> news;
 
 }

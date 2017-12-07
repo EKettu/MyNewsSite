@@ -1,7 +1,7 @@
 package wad.controller;
 
 import wad.domain.FileObject;
-import wad.domain.NewsItem;
+import wad.domain.Newsitem;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +36,7 @@ public class NewsController {
     @GetMapping("/")
     public String list(Model model) {
         Pageable pageable = PageRequest.of(0, 5, Sort.Direction.DESC, "newsDate");
-        Page<NewsItem> selectedNews = newsRepository.findAll(pageable);
+        Page<Newsitem> selectedNews = newsRepository.findAll(pageable);
         // model.addAttribute("selectednews", newsRepository.findAll(pageable));
         model.addAttribute("selectednews", selectedNews);
         // Sort sort = Sort.Order.asc(property);
@@ -44,8 +44,8 @@ public class NewsController {
         int size = (int) newsRepository.count();
         // Pageable pageable2 = PageRequest.of(0, size, Sort.Direction.DESC, "newsDate");
         //Page<NewsItem> allNews = newsRepository.findAll(pageable2);
-        List<NewsItem> allNews = newsRepository.findAll();
-        List<NewsItem> olderNews = new ArrayList<>();
+        List<Newsitem> allNews = newsRepository.findAll();
+        List<Newsitem> olderNews = new ArrayList<>();
         for (int i = 5; i < allNews.size(); i++) {
             olderNews.add(allNews.get(i));
         }
@@ -59,7 +59,7 @@ public class NewsController {
             @RequestParam String text, @RequestParam String category, @RequestParam String writers,
             @RequestParam("file") MultipartFile file) throws IOException {
 
-        NewsItem newsItem = new NewsItem();
+        Newsitem newsItem = new Newsitem();
         newsItem.setTitle(title);
         newsItem.setIngress(ingress);
         newsItem.setText(text);
@@ -90,7 +90,7 @@ public class NewsController {
 //    }
     @GetMapping("/newsItem/{newsItemId}")
     public String getNewsItem(Model model, @PathVariable Long newsItemId) {
-        NewsItem newsItem = newsRepository.getOne(newsItemId);
+        Newsitem newsItem = newsRepository.getOne(newsItemId);
         model.addAttribute("newsItem", newsItem);
 
         return "newsItem";
