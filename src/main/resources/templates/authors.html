@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Authors</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <h2>Add a new author</h2>
+
+        <div>
+            Enter information and press Submit:<br/>
+            <form th:action="@{/authors}" method="POST">
+                Name: <input type="text" name="name" id="name"/><br/>
+                <input type="submit"/>            
+            </form>
+        </div>
+        <ul>
+            <li th:each="author : ${authors}">
+                <span th:text="${author.name}">Author name</span>
+            </li>
+        </ul>     
+
+    </body>
+</html>

@@ -1,7 +1,7 @@
 package wad.controller;
 
 import wad.domain.FileObject;
-import wad.domain.Newsitem;
+import wad.domain.NewsItem;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +21,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import wad.domain.Author;
+import wad.domain.Category;
+import wad.repository.AuthorRepository;
 import wad.repository.FileObjectRepository;
 import wad.repository.NewsRepository;
 
@@ -32,11 +35,14 @@ public class NewsController {
 
     @Autowired
     FileObjectRepository fileRepository;
+    
+    @Autowired
+    AuthorRepository authorRepository;
 
     @GetMapping("/")
     public String list(Model model) {
         Pageable pageable = PageRequest.of(0, 5, Sort.Direction.DESC, "newsDate");
-        Page<Newsitem> selectedNews = newsRepository.findAll(pageable);
+        Page<NewsItem> selectedNews = newsRepository.findAll(pageable);
         // model.addAttribute("selectednews", newsRepository.findAll(pageable));
         model.addAttribute("selectednews", selectedNews);
         // Sort sort = Sort.Order.asc(property);
@@ -44,8 +50,8 @@ public class NewsController {
         int size = (int) newsRepository.count();
         // Pageable pageable2 = PageRequest.of(0, size, Sort.Direction.DESC, "newsDate");
         //Page<NewsItem> allNews = newsRepository.findAll(pageable2);
-        List<Newsitem> allNews = newsRepository.findAll();
-        List<Newsitem> olderNews = new ArrayList<>();
+        List<NewsItem> allNews = newsRepository.findAll();
+        List<NewsItem> olderNews = new ArrayList<>();
         for (int i = 5; i < allNews.size(); i++) {
             olderNews.add(allNews.get(i));
         }
@@ -56,13 +62,23 @@ public class NewsController {
 
     @PostMapping("/news")
     public String addNews(@RequestParam String title, @RequestParam String ingress,
-            @RequestParam String text, @RequestParam String category, @RequestParam String writers,
+            @RequestParam String text, @RequestParam(value="authors[]") String[] authors, @RequestParam String category,
             @RequestParam("file") MultipartFile file) throws IOException {
 
-        Newsitem newsItem = new Newsitem();
+        System.out.println("authors is " + authors);
+        NewsItem newsItem = new NewsItem();
         newsItem.setTitle(title);
         newsItem.setIngress(ingress);
         newsItem.setText(text);
+//        
+        List<Author> authors2 = new ArrayList<>();
+        for (int i = 0; i < authors.length; i++) {
+            authors2.add(new Author(authors[i]));
+        }
+        
+        newsItem.setAuthors(authors2);
+        
+        
         newsItem.setCategory(category);
         FileObject fo = new FileObject();
         fo.setName(file.getOriginalFilename());
@@ -73,6 +89,13 @@ public class NewsController {
         newsItem.setPicture(fo);
         newsRepository.save(newsItem);
         return "redirect:/";
+    }
+    
+    @GetMapping("/news")
+    public String setAuthorsAndCategories(Model model) {
+        System.out.println("täällä");
+        model.addAttribute("authors", authorRepository.findAll());
+        return "news";
     }
 
 //    @PostMapping("/news")
@@ -90,7 +113,7 @@ public class NewsController {
 //    }
     @GetMapping("/newsItem/{newsItemId}")
     public String getNewsItem(Model model, @PathVariable Long newsItemId) {
-        Newsitem newsItem = newsRepository.getOne(newsItemId);
+        NewsItem newsItem = newsRepository.getOne(newsItemId);
         model.addAttribute("newsItem", newsItem);
 
         return "newsItem";

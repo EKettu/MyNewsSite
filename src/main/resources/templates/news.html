@@ -9,19 +9,33 @@
     <body>
 
         <div>
-           
+
             Enter title etc<br/>
             <form action="/news" th:method="POST" enctype = "multipart/form-data">
                 Title: <input type="text" name="title" id="title"/><br/>
                 Ingress: <input type="text" name="ingress" id="ingress"/><br/>
                 Text: <textarea name="text" id="text" ></textarea><br/>
                 Category: <input type="text" name="category" id="category"/><br/>
-                Writers: <input type="text" name="writers" id="writers"/><br/>
+                Authors: 
+              
+               <select name="authors[]" th:multiple = "true" th:path="news">
+                   <option th:each="author : ${authors}" 
+                           th:value="${author.name}" 
+                           th:text="${author.name}">Authors</option>
+               </select><br/>
+               <p>Hold down the Ctrl (windows) / Command (Mac) button to select multiple options.</p><br/>
+
+  <!--
+                <select name="authors[]" th:multiple = "true"th:path="news" >
+                    <form:options items ="${authors}" itemValue ="${author.name}" itemLabel ="${author.name}"/>
+                </select> 
+   -->
+
                 Picture: <input type="file" name="file" id="file"/><br/>
                 <input type="submit"/>            
             </form>
-            
-             </div>
+
+        </div>
     </body> 
 
 </html>

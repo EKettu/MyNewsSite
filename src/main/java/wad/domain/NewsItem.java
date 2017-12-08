@@ -14,7 +14,7 @@ import javax.persistence.OneToOne;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
-public class Newsitem extends AbstractPersistable<Long> {
+public class NewsItem extends AbstractPersistable<Long> {
 
     @Column
     private String title;
@@ -50,7 +50,7 @@ public class Newsitem extends AbstractPersistable<Long> {
 
     private LocalDate newsDate;
 
-    public Newsitem() {
+    public NewsItem() {
         this.newsDate = LocalDate.now();
     }
 

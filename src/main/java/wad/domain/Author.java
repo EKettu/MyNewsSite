@@ -17,8 +17,13 @@ public class Author extends AbstractPersistable<Long> {
 
     @Id
     private Long id;
-
-    public Long getId() {
+    private String name;
+    
+    public Author(String name) {
+        this.name = name;
+    }
+    
+        public Long getId() {
         return id;
     }
 
@@ -26,9 +31,7 @@ public class Author extends AbstractPersistable<Long> {
         this.id = id;
     }
 
-    private String name;
-
     @ManyToMany
-    private List<Newsitem> news;
+    private List<NewsItem> news;
 
 }
