@@ -17,8 +17,8 @@
         <a th:href="@{/categories}">Add a new category</a><br/>
 
         <h2>Current news</h2>
-        
-         <ul>
+
+        <ul>
             <li th:each="newsItem : ${selectednews}">
                 <a th:href="@{/newsItem/{newsItemId}(newsItemId=${newsItem.id})}" >
                     <span th:text="${newsItem.title + ' ' + newsItem.newsDate}">title and date</span>

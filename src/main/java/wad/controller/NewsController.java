@@ -24,8 +24,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import wad.domain.Author;
 import wad.domain.Category;
 import wad.repository.AuthorRepository;
-import wad.repository.FileObjectRepository;
+import wad.repository.CategoryRepository;
 import wad.repository.NewsRepository;
+import wad.service.FileService;
+import wad.service.NewsService;
 
 @Controller
 public class NewsController {
@@ -34,8 +36,14 @@ public class NewsController {
     private NewsRepository newsRepository;
 
     @Autowired
-    FileObjectRepository fileRepository;
-    
+    private CategoryRepository categoryRepository;
+
+    @Autowired
+    FileService fileService;
+
+    @Autowired
+    NewsService newsService;
+
     @Autowired
     AuthorRepository authorRepository;
 
@@ -61,40 +69,35 @@ public class NewsController {
     }
 
     @PostMapping("/news")
-    public String addNews(@RequestParam String title, @RequestParam String ingress,
-            @RequestParam String text, @RequestParam(value="authors[]") String[] authors, @RequestParam String category,
+    public String addNews(@RequestParam String title,
+            @RequestParam String ingress, @RequestParam String text,
+            @RequestParam(value = "authors[]") String[] authors,
+            @RequestParam(value = "categories[]") String[] categories,
             @RequestParam("file") MultipartFile file) throws IOException {
 
-        System.out.println("authors is " + authors);
         NewsItem newsItem = new NewsItem();
         newsItem.setTitle(title);
         newsItem.setIngress(ingress);
         newsItem.setText(text);
-//        
-        List<Author> authors2 = new ArrayList<>();
-        for (int i = 0; i < authors.length; i++) {
-            authors2.add(new Author(authors[i]));
-        }
-        
-        newsItem.setAuthors(authors2);
-        
-        
-        newsItem.setCategory(category);
-        FileObject fo = new FileObject();
-        fo.setName(file.getOriginalFilename());
-        fo.setContentType(file.getContentType());
-        fo.setContentLength(file.getSize());
-        fo.setContent(file.getBytes());
-        fileRepository.save(fo);
-        newsItem.setPicture(fo);
+
+        List<Author> authorList = newsService.createAuthorList(authors);
+        List<Category> categoryList = newsService.createCategoryList(categories);
+
+        newsItem.setAuthors(authorList);
+        newsItem.setCategories(categoryList);
+        newsItem.setPicture(fileService.createFile(file));
+
         newsRepository.save(newsItem);
+        newsService.assignNewsItemToAuthors(newsItem, authorList);
+        newsService.assignNewsItemToCategories(newsItem, categoryList);
+
         return "redirect:/";
     }
-    
+
     @GetMapping("/news")
     public String setAuthorsAndCategories(Model model) {
-        System.out.println("täällä");
         model.addAttribute("authors", authorRepository.findAll());
+        model.addAttribute("categories", categoryRepository.findAll());
         return "news";
     }
 
@@ -115,7 +118,9 @@ public class NewsController {
     public String getNewsItem(Model model, @PathVariable Long newsItemId) {
         NewsItem newsItem = newsRepository.getOne(newsItemId);
         model.addAttribute("newsItem", newsItem);
-
+        model.addAttribute("categories", newsItem.getCategories());
+        model.addAttribute("authors", newsItem.getAuthors());
+        model.addAttribute("otherNews", newsService.createOtherNewsList(newsItem));
         return "newsItem";
     }
 }

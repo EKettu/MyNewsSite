@@ -4,6 +4,9 @@
         <title>Add News</title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"/>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
     </head>
     <body>
@@ -15,22 +18,19 @@
                 Title: <input type="text" name="title" id="title"/><br/>
                 Ingress: <input type="text" name="ingress" id="ingress"/><br/>
                 Text: <textarea name="text" id="text" ></textarea><br/>
-                Category: <input type="text" name="category" id="category"/><br/>
+                Categories:      
+                <select name="categories[]" th:multiple = "true" th:path="news">
+                    <option th:each="category : ${categories}" 
+                            th:value="${category.name}" 
+                            th:text="${category.name}">Categories</option>
+                </select><br/>
                 Authors: 
-              
-               <select name="authors[]" th:multiple = "true" th:path="news">
-                   <option th:each="author : ${authors}" 
-                           th:value="${author.name}" 
-                           th:text="${author.name}">Authors</option>
-               </select><br/>
-               <p>Hold down the Ctrl (windows) / Command (Mac) button to select multiple options.</p><br/>
-
-  <!--
-                <select name="authors[]" th:multiple = "true"th:path="news" >
-                    <form:options items ="${authors}" itemValue ="${author.name}" itemLabel ="${author.name}"/>
-                </select> 
-   -->
-
+                <select name="authors[]" th:multiple = "true" th:path="news">
+                    <option th:each="author : ${authors}" 
+                            th:value="${author.name}" 
+                            th:text="${author.name}">Authors</option>
+                </select><br/>
+                <p>Hold down the Ctrl (windows) / Command (Mac) button to select multiple options.</p><br/>
                 Picture: <input type="file" name="file" id="file"/><br/>
                 <input type="submit"/>            
             </form>

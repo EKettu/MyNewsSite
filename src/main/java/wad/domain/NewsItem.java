@@ -3,6 +3,7 @@ package wad.domain;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -22,22 +23,22 @@ public class NewsItem extends AbstractPersistable<Long> {
     @Column(length = 3000)
     private String text;
 
-    @Column
+    @Column(length = 500)
     private String ingress;
-
-    @ElementCollection
-    @CollectionTable(name = "writers")
-    private List<String> writers;
+//
+//    @ElementCollection
+//    @CollectionTable(name = "writers")
+//    private List<String> writers;
 
     @OneToOne(fetch = FetchType.EAGER)
     private FileObject picture;
 
     private String category;
 
-    @ManyToMany
+    @ManyToMany(mappedBy ="news")            
     private List<Category> categories;
-    
-     @ManyToMany(mappedBy="news")
+
+    @ManyToMany(mappedBy = "news")
     private List<Author> authors;
 
     public List<Author> getAuthors() {
@@ -113,14 +114,13 @@ public class NewsItem extends AbstractPersistable<Long> {
         this.ingress = ingress;
     }
 
-    public List<String> getWriters() {
-        return writers;
-    }
-
-    public void setWriters(List<String> writers) {
-        this.writers = writers;
-    }
-
+//    public List<String> getWriters() {
+//        return writers;
+//    }
+//
+//    public void setWriters(List<String> writers) {
+//        this.writers = writers;
+//    }
     public Long getId() {
         return id;
     }

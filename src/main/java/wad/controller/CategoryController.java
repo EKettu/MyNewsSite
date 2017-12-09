@@ -30,7 +30,7 @@ public class CategoryController {
     public String addCategory(@RequestParam String name) {
         Category category = new Category(name);
         categoryRepository.save(category);
-        return "redirect:/categories";
+        return "redirect:/";
     }
 
 }
