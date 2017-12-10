@@ -3,6 +3,7 @@ package wad.domain;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
@@ -20,7 +21,7 @@ public class Author extends AbstractPersistable<Long> {
     private Long id;
     private String name;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<NewsItem> news;
 
     public Author(String name) {

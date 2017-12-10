@@ -15,7 +15,7 @@
                     <a class="navbar-brand" th:href="@{/}">NiceNewsSite</a>
                 </div>
                 <ul class="nav navbar-nav">
-                    <li class="active"><a th:href="@{/home}">Home</a></li>
+                    <li class="active"><a th:href="@{/}">Home</a></li>
                     <li><a th:href="@{/news}">Add News</a></li>
                     <li><a th:href="@{/authors}">Add a new author</a></li>
                     <li><a th:href="@{/categories}">Add a new category</a></li>
@@ -26,7 +26,7 @@
         <h2>Add a new author</h2>
 
         <div>
-            Enter information and press Submit:<br/>
+            Enter the name and press Submit:<br/>
             <form th:action="@{/authors}" method="POST">
                 Name: <input type="text" name="name" id="name"/><br/>
                 <input type="submit"/>            

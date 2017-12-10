@@ -5,7 +5,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"/>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-       
+
     </head>
 
     <body class="container">
@@ -19,33 +19,41 @@
                     <li><a th:href="@{/news}">Add News</a></li>
                     <li><a th:href="@{/authors}">Add a new author</a></li>
                     <li><a th:href="@{/categories}">Add a new category</a></li>
-                  
-            <!--               <li th:if="categories != null" class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" th:href="@{/category}">Categories
-                                    <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li th:each="category : categories">
-                                        <a th:href="@{/category/{categoryId}(categoryId=${category.id})}">
-                                            <span th:text="${category.name}">name</span>
-                                        </a>
-                                    </li>
-        
-                                </ul>
-                            </li> 
-                  --> 
+
+                    <!--               <li th:if="categories != null" class="dropdown">
+                                        <a class="dropdown-toggle" data-toggle="dropdown" th:href="@{/category}">Categories
+                                            <span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li th:each="category : categories">
+                                                <a th:href="@{/category/{categoryId}(categoryId=${category.id})}">
+                                                    <span th:text="${category.name}">name</span>
+                                                </a>
+                                            </li>
+                
+                                        </ul>
+                                    </li> 
+                    --> 
+                </ul>
+                <ul th:if="${account!=null}" class="nav navbar-nav navbar-right">
+                    <li th:if="${account!=null}">
+                     <form th:action="@{/logout}" method="POST">
+                        <input type="submit" value="Logout"/>
+                    </form>
+
+                    </li>
                 </ul>
             </div>
         </nav>
 
         <h1>Hello NewsSite!</h1>
 
-        <h2>Some news</h2>
+        <h2>Some links (unnecessary)</h2>
 
         <a th:href="@{/news}">Add a new piece of news</a><br/>
         <a th:href="@{/authors}">Add a new author</a><br/>
         <a th:href="@{/categories}">Add a new category</a><br/>
 
-        <h2>Current news</h2>
+        <h2>Latest news</h2>
 
         <ul>
             <li th:each="newsItem : ${selectednews}">
@@ -58,6 +66,7 @@
             </li>
         </ul>
 
+        <h2>Some older news</h2>
         <ul>
             <li th:each="newsItem : ${oldernews}">
                 <a th:href="@{/newsItem/{newsItemId}(newsItemId=${newsItem.id})}" >
