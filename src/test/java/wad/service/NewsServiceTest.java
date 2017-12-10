@@ -50,7 +50,7 @@ public class NewsServiceTest {
     @Before
     public void setUp() throws IOException {
         String content = UUID.randomUUID().toString().substring(0, 6);
-        MockMultipartFile file = new MockMultipartFile("file", "aarrggghh.gif", "image/gif", content.getBytes());
+        MockMultipartFile file = new MockMultipartFile("file", "aarrggghh.png", "image/png", content.getBytes());
         newsItem = new NewsItem();
         newsItem.setTitle("Uutinen1");
         newsItem.setIngress("Ingressi");

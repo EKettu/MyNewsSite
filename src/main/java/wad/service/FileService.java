@@ -13,13 +13,15 @@ public class FileService {
     @Autowired
     FileObjectRepository fileRepository;
 
-    public FileObject createFile(MultipartFile file)throws IOException  {
+    public FileObject createFile(MultipartFile file) throws IOException {
         FileObject fileObject = new FileObject();
-        fileObject.setName(file.getOriginalFilename());
-        fileObject.setContentType(file.getContentType());
-        fileObject.setContentLength(file.getSize());
-        fileObject.setContent(file.getBytes());
-        fileRepository.save(fileObject);
+        if (file.getContentType().equals("image/png")) {
+            fileObject.setName(file.getOriginalFilename());
+            fileObject.setContentType(file.getContentType());
+            fileObject.setContentLength(file.getSize());
+            fileObject.setContent(file.getBytes());
+            fileRepository.save(fileObject);
+        }
         return fileObject;
     }
 }

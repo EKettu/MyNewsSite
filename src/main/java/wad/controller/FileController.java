@@ -26,7 +26,7 @@ public class FileController {
      * @param newsItemId Long, id of an individual NewsItem object
      * @return byte[] containing the picture file
      */
-    @GetMapping(path = "/newsItem/{newsItemId}/content", produces = "image/gif")
+    @GetMapping(path = "/newsItem/{newsItemId}/content", produces = "image/png")
     @ResponseBody
     public byte[] get(@PathVariable Long newsItemId) {
         return newsRepository.getOne(newsItemId).getPicture().getContent();
