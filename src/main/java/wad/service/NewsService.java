@@ -3,6 +3,10 @@ package wad.service;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import wad.domain.Author;
 import wad.domain.Category;
@@ -54,16 +58,42 @@ public class NewsService {
             categoryRepository.save(category);
         }
     }
-    
+
     public List<NewsItem> createOtherNewsList(NewsItem newsItem) {
         List<NewsItem> otherNews = new ArrayList<>();
         for (Category category : newsItem.getCategories()) {
             for (NewsItem otherNewsItem : category.getNews()) {
-                if(otherNewsItem.getId()!=newsItem.getId()) {
+                if (otherNewsItem.getId() != newsItem.getId()) {
                     otherNews.add(otherNewsItem);
                 }
             }
-        }    
+        }
         return otherNews;
+    }
+
+    public List<NewsItem> getFiveNewestNews() {
+        Pageable pageable = PageRequest.of(0, 5, Sort.Direction.DESC, "newsTime");
+        Page<NewsItem> selectedNews = newsRepository.findAll(pageable);
+        List<NewsItem> fiveNewest = selectedNews.getContent();
+
+        return fiveNewest;
+    }
+
+    public List<NewsItem> getOlderNews(List<NewsItem> fiveNewest) {
+        int size = (int) newsRepository.count();
+        if (size == 0) {
+            size = 1;
+        }
+
+        Pageable pageable = PageRequest.of(0, size, Sort.Direction.DESC, "newsTime");
+        Page<NewsItem> allNews = newsRepository.findAll(pageable);
+        List<NewsItem> olderNews = new ArrayList<>();
+
+        for (NewsItem newsItem : allNews) {
+            if (!fiveNewest.contains(newsItem)) {
+                olderNews.add(newsItem);
+            }
+        }
+        return olderNews;
     }
 }

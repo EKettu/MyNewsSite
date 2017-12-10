@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Authors</title>
+        <title>Categories</title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
@@ -23,20 +23,17 @@
                 </ul>
             </div>
         </nav>
-        <h2>Add a new author</h2>
-
-        <div>
-            Enter information and press Submit:<br/>
-            <form th:action="@{/authors}" method="POST">
-                Name: <input type="text" name="name" id="name"/><br/>
-                <input type="submit"/>            
-            </form>
+        <h1><span th:text="${category.name}">JCVD</span></h1>
+        <h2>All news in this category</h2>
+        <div th:if ="category.news!= null">
+            <ul>
+                <li th:each="newsItem : ${news}">
+                    <a th:href="@{/newsItem/{newsItemId}(newsItemId=${newsItem.id})}" >
+                        <span th:text="${newsItem.title + ' ' + newsItem.newsDate}">title and date</span>
+                        <span th:text="${newsItem.ingress}">ingress</span>
+                    </a> 
+                </li>
+            </ul> 
         </div>
-        <ul>
-            <li th:each="author : ${authors}">
-                <span th:text="${author.name}">Author name</span>
-            </li>
-        </ul>     
-
     </body>
 </html>

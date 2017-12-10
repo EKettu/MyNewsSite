@@ -8,11 +8,25 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     </head>
     <body>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" th:href="@{/}">NiceNewsSite</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a th:href="@{/home}">Home</a></li>
+                    <li><a th:href="@{/news}">Add News</a></li>
+                    <li><a th:href="@{/authors}">Add a new author</a></li>
+                    <li><a th:href="@{/categories}">Add a new category</a></li>
+
+                </ul>
+            </div>
+        </nav>
 
         <h1><span th:text="${newsItem.title}">JCVD</span></h1>
         <img th:src="@{/newsItem/{newsItemId}/content(newsItemId = ${newsItem.id})}"/>
         <p><span th:text="${newsItem.ingress}">Ingress</span></p>
-        <p><span th:text="${newsItem.text}">Text</span></p>
+        <p><span th:text="${newsItem.newsText}">Text</span></p>
         <h3>Authors:</h3>
         <ul>
             <li th:each="author : ${newsItem.authors}">
@@ -34,20 +48,6 @@
                         <span th:text="${newsItem.ingress}">ingress</span>
                     </a> 
                 </li>
-                <!--        <li th:each="category : ${newsItem.categories}">
-                            <ul>
-                                <li th:each="newsItem : ${category.news}">
-        
-                                    <a th:href="@{/newsItem/{newsItemId}(newsItemId=${newsItem.id})}" >
-                                        <span th:text="${newsItem.title + ' ' + newsItem.newsDate}">title and date</span>
-                                        <span th:text="${newsItem.ingress}">ingress</span>
-                                    </a> 
-        
-                                </li>
-                            </ul>
-                        </li>
-                
-                -->
             </ul>
 
         </div>

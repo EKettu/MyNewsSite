@@ -1,6 +1,7 @@
 package wad.domain;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -21,7 +22,7 @@ public class NewsItem extends AbstractPersistable<Long> {
     private String title;
 
     @Column(length = 3000)
-    private String text;
+    private String newsText;
 
     @Column(length = 500)
     private String ingress;
@@ -33,13 +34,23 @@ public class NewsItem extends AbstractPersistable<Long> {
     @OneToOne(fetch = FetchType.EAGER)
     private FileObject picture;
 
-    private String category;
-
-    @ManyToMany(mappedBy ="news")            
+    @ManyToMany(mappedBy = "news")
     private List<Category> categories;
 
     @ManyToMany(mappedBy = "news")
     private List<Author> authors;
+
+    private LocalDateTime newsTime;
+
+    private LocalDate newsDate;
+
+    @Id
+    private Long id;
+
+    public NewsItem() {
+        this.newsDate = LocalDate.now();
+        this.newsTime = LocalDateTime.now();
+    }
 
     public List<Author> getAuthors() {
         return authors;
@@ -49,18 +60,20 @@ public class NewsItem extends AbstractPersistable<Long> {
         this.authors = authors;
     }
 
-    private LocalDate newsDate;
-
-    public NewsItem() {
-        this.newsDate = LocalDate.now();
-    }
-
     public List<Category> getCategories() {
         return categories;
     }
 
     public void setCategories(List<Category> categories) {
         this.categories = categories;
+    }
+
+    public LocalDateTime getNewsTime() {
+        return newsTime;
+    }
+
+    public void setNewsTime(LocalDateTime newsTime) {
+        this.newsTime = newsTime;
     }
 
     public LocalDate getNewsDate() {
@@ -79,17 +92,6 @@ public class NewsItem extends AbstractPersistable<Long> {
         this.picture = picture;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    @Id
-    private Long id;
-
     public String getTitle() {
         return title;
     }
@@ -98,12 +100,12 @@ public class NewsItem extends AbstractPersistable<Long> {
         this.title = title;
     }
 
-    public String getText() {
-        return text;
+    public String getNewsText() {
+        return newsText;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setNewsText(String newsText) {
+        this.newsText = newsText;
     }
 
     public String getIngress() {
@@ -114,13 +116,6 @@ public class NewsItem extends AbstractPersistable<Long> {
         this.ingress = ingress;
     }
 
-//    public List<String> getWriters() {
-//        return writers;
-//    }
-//
-//    public void setWriters(List<String> writers) {
-//        this.writers = writers;
-//    }
     public Long getId() {
         return id;
     }

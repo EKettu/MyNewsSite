@@ -46,31 +46,28 @@ public class NewsController {
 
     @Autowired
     AuthorRepository authorRepository;
+    
+//    public NewsController() {
+//        Category category1 = new Category("Kissat");
+//        categoryRepository.save(category1);
+//        Category category2 = new Category("Kasvit");
+//        categoryRepository.save(category2);
+//    }
 
     @GetMapping("/")
-    public String list(Model model) {
-        Pageable pageable = PageRequest.of(0, 5, Sort.Direction.DESC, "newsDate");
-        Page<NewsItem> selectedNews = newsRepository.findAll(pageable);
-        // model.addAttribute("selectednews", newsRepository.findAll(pageable));
-        model.addAttribute("selectednews", selectedNews);
-        // Sort sort = Sort.Order.asc(property);
-        //newsRepository.findAll(sort);
-        int size = (int) newsRepository.count();
-        // Pageable pageable2 = PageRequest.of(0, size, Sort.Direction.DESC, "newsDate");
-        //Page<NewsItem> allNews = newsRepository.findAll(pageable2);
-        List<NewsItem> allNews = newsRepository.findAll();
-        List<NewsItem> olderNews = new ArrayList<>();
-        for (int i = 5; i < allNews.size(); i++) {
-            olderNews.add(allNews.get(i));
-        }
-        model.addAttribute("oldernews", olderNews);
-        //  model.addAttribute("allnews", newsRepository.findAll());
+    public String list(Model model) {    
+        List<NewsItem> fiveNewest = newsService.getFiveNewestNews();
+        
+        model.addAttribute("selectednews", fiveNewest);
+        model.addAttribute("oldernews", newsService.getOlderNews(fiveNewest));       
+        model.addAttribute("categories", categoryRepository.findAll());
+
         return "home";
     }
 
     @PostMapping("/news")
     public String addNews(@RequestParam String title,
-            @RequestParam String ingress, @RequestParam String text,
+            @RequestParam String ingress, @RequestParam String newsText,
             @RequestParam(value = "authors[]") String[] authors,
             @RequestParam(value = "categories[]") String[] categories,
             @RequestParam("file") MultipartFile file) throws IOException {
@@ -78,7 +75,7 @@ public class NewsController {
         NewsItem newsItem = new NewsItem();
         newsItem.setTitle(title);
         newsItem.setIngress(ingress);
-        newsItem.setText(text);
+        newsItem.setNewsText(newsText);
 
         List<Author> authorList = newsService.createAuthorList(authors);
         List<Category> categoryList = newsService.createCategoryList(categories);

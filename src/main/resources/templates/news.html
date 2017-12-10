@@ -9,30 +9,59 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
     </head>
-    <body>
+    <body class="container">
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" th:href="@{/}">NiceNewsSite</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a th:href="@{/home}">Home</a></li>
+                    <li><a th:href="@{/news}">Add News</a></li>
+                    <li><a th:href="@{/authors}">Add a new author</a></li>
+                    <li><a th:href="@{/categories}">Add a new category</a></li>
+
+                </ul>
+            </div>
+        </nav>
 
         <div>
-
-            Enter title etc<br/>
+            <h3>Add a new piece of news</h3>
             <form action="/news" th:method="POST" enctype = "multipart/form-data">
-                Title: <input type="text" name="title" id="title"/><br/>
-                Ingress: <input type="text" name="ingress" id="ingress"/><br/>
-                Text: <textarea name="text" id="text" ></textarea><br/>
-                Categories:      
-                <select name="categories[]" th:multiple = "true" th:path="news">
-                    <option th:each="category : ${categories}" 
-                            th:value="${category.name}" 
-                            th:text="${category.name}">Categories</option>
-                </select><br/>
-                Authors: 
-                <select name="authors[]" th:multiple = "true" th:path="news">
-                    <option th:each="author : ${authors}" 
-                            th:value="${author.name}" 
-                            th:text="${author.name}">Authors</option>
-                </select><br/>
-                <p>Hold down the Ctrl (windows) / Command (Mac) button to select multiple options.</p><br/>
-                Picture: <input type="file" name="file" id="file"/><br/>
-                <input type="submit"/>            
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" name="title" id="title"/>
+                </div>
+                <div class="form-group">
+                    <label for="ingress">Ingress</label>
+                    <textarea name="ingress" id="ingress" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="newsText">Text</label>
+                    <textarea name="newsText" id="newsText" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="categories">Categories (Hold down the Ctrl (windows) / Command (Mac) button to select multiple options.)</label>
+                    <select name="categories[]" th:multiple = "true" th:path="news" class="form-control">
+                        <option th:each="category : ${categories}" 
+                                th:value="${category.name}" 
+                                th:text="${category.name}">Categories</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="authors">Authors (Hold down the Ctrl (windows) / Command (Mac) button to select multiple options.)</label>
+                    <select name="authors[]" th:multiple = "true" th:path="news" class="form-control">
+                        <option th:each="author : ${authors}" 
+                                th:value="${author.name}" 
+                                th:text="${author.name}">Authors</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="picture">Add picture</label>
+                    <input type="file" class="form-control" name="file" id="file"/>
+                </div>
+
+                <button type="submit" class="btn btn-default">Submit</button>
             </form>
 
         </div>

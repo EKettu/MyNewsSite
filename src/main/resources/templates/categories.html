@@ -4,9 +4,25 @@
         <title>Categories</title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"/>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     </head>
     <body>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" th:href="@{/}">NiceNewsSite</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a th:href="@{/home}">Home</a></li>
+                    <li><a th:href="@{/news}">Add News</a></li>
+                    <li><a th:href="@{/authors}">Add a new author</a></li>
+                    <li><a th:href="@{/categories}">Add a new category</a></li>
+
+                </ul>
+            </div>
+        </nav>
         <h2>Add a new category</h2>
 
         <div>
@@ -18,8 +34,12 @@
         </div>
         <ul>
             <li th:each="category : ${categories}">
-                <span th:text="${category.name}">Author name</span>
+                <a th:href="@{/category/{categoryId}(categoryId=${category.id})}">
+                    <span th:text="${category.name}">name</span>
+                    <span th:text="${category.id}">name</span>
+                </a>
             </li>
-        </ul>  
+        </ul> 
+        
     </body>
 </html>

@@ -5,9 +5,38 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"/>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+       
     </head>
 
     <body class="container">
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" th:href="@{/}">NiceNewsSite</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a th:href="@{/}">Home</a></li>
+                    <li><a th:href="@{/news}">Add News</a></li>
+                    <li><a th:href="@{/authors}">Add a new author</a></li>
+                    <li><a th:href="@{/categories}">Add a new category</a></li>
+                  
+            <!--               <li th:if="categories != null" class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" th:href="@{/category}">Categories
+                                    <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li th:each="category : categories">
+                                        <a th:href="@{/category/{categoryId}(categoryId=${category.id})}">
+                                            <span th:text="${category.name}">name</span>
+                                        </a>
+                                    </li>
+        
+                                </ul>
+                            </li> 
+                  --> 
+                </ul>
+            </div>
+        </nav>
+
         <h1>Hello NewsSite!</h1>
 
         <h2>Some news</h2>
@@ -21,8 +50,9 @@
         <ul>
             <li th:each="newsItem : ${selectednews}">
                 <a th:href="@{/newsItem/{newsItemId}(newsItemId=${newsItem.id})}" >
-                    <span th:text="${newsItem.title + ' ' + newsItem.newsDate}">title and date</span>
-                    <span th:text="${newsItem.ingress}">title and date</span>
+                    <span th:text="${newsItem.title + ' ' + newsItem.newsDate}">title and date</span><br/>
+                    <span th:text="${newsItem.ingress}">title and date</span><br/>
+                    <img th:src="@{/newsItem/{newsItemId}/content(newsItemId = ${newsItem.id})}"/><br/>
                 </a> 
 
             </li>
