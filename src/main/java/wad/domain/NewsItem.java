@@ -26,9 +26,9 @@ public class NewsItem extends AbstractPersistable<Long> {
     
     @Column(length = 500)
     private String ingress;
-
-    @OneToOne
-    private FileObject picture;
+//
+//    @OneToOne
+//    private FileObject picture;
     
     @ManyToMany(mappedBy = "news")
     private List<Category> categories;
@@ -103,14 +103,14 @@ public class NewsItem extends AbstractPersistable<Long> {
     public void setNewsDate(LocalDate newsDate) {
         this.newsDate = newsDate;
     }
-    
-    public FileObject getPicture() {
-        return picture;
-    }
-    
-    public void setPicture(FileObject picture) {
-        this.picture = picture;
-    }
+//    
+//    public FileObject getPicture() {
+//        return picture;
+//    }
+//    
+//    public void setPicture(FileObject picture) {
+//        this.picture = picture;
+//    }
     
     public String getTitle() {
         return title;

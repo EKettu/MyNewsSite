@@ -29,7 +29,8 @@ public class FileController {
     @GetMapping(path = "/newsItem/{newsItemId}/content", produces = "image/png")
     @ResponseBody
     public byte[] get(@PathVariable Long newsItemId) {
-        return newsRepository.getOne(newsItemId).getPicture().getContent();
+      //  return newsRepository.getOne(newsItemId).getPicture().getContent();
+        return null;
     }
 
 }

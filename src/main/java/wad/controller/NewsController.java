@@ -86,7 +86,6 @@ public class NewsController {
         model.addAttribute("selectednews", fiveNewest);
         model.addAttribute("oldernews", newsService.getOlderNews(fiveNewest));       
         model.addAttribute("categories", categoryRepository.findAll());
-        System.out.println("CategoryRepossa on " + categoryRepository.findAll());
         return "home";
     }
 
@@ -105,8 +104,9 @@ public class NewsController {
     public String addNews(@RequestParam String title,
             @RequestParam String ingress, @RequestParam String newsText,
             @RequestParam(value = "authors[]") String[] authors,
-            @RequestParam(value = "categories[]") String[] categories,
-            @RequestParam("file") MultipartFile file) throws IOException {
+            @RequestParam(value = "categories[]") String[] categories)
+          //  @RequestParam("file") MultipartFile file) throws IOException 
+            {
 
         NewsItem newsItem = new NewsItem();
         newsItem.setTitle(title);
@@ -118,7 +118,7 @@ public class NewsController {
 
         newsItem.setAuthors(authorList);
         newsItem.setCategories(categoryList);
-        newsItem.setPicture(fileService.createFile(file));
+      //  newsItem.setPicture(fileService.createFile(file));
 
         newsRepository.save(newsItem);
         newsService.assignNewsItemToAuthors(newsItem, authorList);

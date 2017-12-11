@@ -66,7 +66,7 @@ public class NewsServiceTest {
         fileObject.setContentLength(file.getSize());
         fileObject.setContent(file.getBytes());
         fileRepository.save(fileObject);
-        newsItem.setPicture(fileObject);
+       // newsItem.setPicture(fileObject);
 
         List<Author> authors = newsItem.getAuthors();
         Author author1 = new Author("Jokunen");
