@@ -30,7 +30,9 @@ public class NewsService {
     public List<Author> createAuthorList(String[] authors) {
         List<Author> authorsList = new ArrayList<>();
         for (int i = 0; i < authors.length; i++) {
-            authorsList.add(new Author(authors[i]));
+            Author author = authorRepository.findByName(authors[i]);
+            authorsList.add(author);
+          //  authorRepository.save(author);
         }
         return authorsList;
     }
@@ -38,7 +40,9 @@ public class NewsService {
     public List<Category> createCategoryList(String[] categories) {
         List<Category> categoryList = new ArrayList<>();
         for (int i = 0; i < categories.length; i++) {
-            categoryList.add(new Category(categories[i]));
+            Category category = categoryRepository.findByName(categories[i]);
+            categoryList.add(category);
+         //  categoryRepository.save(category);
         }
         return categoryList;
     }

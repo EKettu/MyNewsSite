@@ -86,7 +86,7 @@ public class NewsController {
         model.addAttribute("selectednews", fiveNewest);
         model.addAttribute("oldernews", newsService.getOlderNews(fiveNewest));       
         model.addAttribute("categories", categoryRepository.findAll());
-
+        System.out.println("CategoryRepossa on " + categoryRepository.findAll());
         return "home";
     }
 
@@ -140,15 +140,8 @@ public class NewsController {
     }
 
 //    @PostMapping("/news")
-//    public String addNews(@Valid @ModelAttribute NewsItem newsItem, 
-//            @RequestParam("file") MultipartFile file) throws IOException {
-//                FileObject fo = new FileObject();
-//        fo.setName(file.getOriginalFilename());
-//        fo.setContentType(file.getContentType());
-//        fo.setContentLength(file.getSize());
-//        fo.setContent(file.getBytes());
-//        fileRepository.save(fo);
-//        newsItem.setPicture(fo);
+//    public String addNews(@Valid @ModelAttribute NewsItem newsItem) throws IOException {
+//
 //        newsRepository.save(newsItem);
 //        return "redirect:/";
 //    }
