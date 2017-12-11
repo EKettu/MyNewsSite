@@ -13,22 +13,26 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotEmpty;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
 public class NewsItem extends AbstractPersistable<Long> {
     
-    @Column
+  //  @NotEmpty(message = "Field can not be empty!")
+    @Column(name="title")
     private String title;
     
-    @Column(length = 3000)
+  // @NotEmpty(message = "Field can not be empty!")
+    @Column(name="newsText", length = 3000)
     private String newsText;
     
-    @Column(length = 500)
+  // @NotEmpty(message = "Field can not be empty!")
+    @Column(name="ingress", length = 500)
     private String ingress;
-//
-//    @OneToOne
-//    private FileObject picture;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    private FileObject picture;
     
     @ManyToMany(mappedBy = "news")
     private List<Category> categories;
@@ -103,14 +107,14 @@ public class NewsItem extends AbstractPersistable<Long> {
     public void setNewsDate(LocalDate newsDate) {
         this.newsDate = newsDate;
     }
-//    
-//    public FileObject getPicture() {
-//        return picture;
-//    }
-//    
-//    public void setPicture(FileObject picture) {
-//        this.picture = picture;
-//    }
+    
+    public FileObject getPicture() {
+        return picture;
+    }
+    
+    public void setPicture(FileObject picture) {
+        this.picture = picture;
+    }
     
     public String getTitle() {
         return title;

@@ -37,7 +37,7 @@
         </nav>
 
         <h1><span th:text="${newsItem.title}">JCVD</span></h1>
-    <!--    <img th:src="@{/newsItem/{newsItemId}/content(newsItemId = ${newsItem.id})}"/> -->
+       <img th:src="@{/newsItem/{newsItemId}/content(newsItemId = ${newsItem.id})}"/> 
         <p><span th:text="${newsItem.ingress}">Ingress</span></p>
         <p><span th:text="${newsItem.newsText}">Text</span></p>
         <h3>Authors:</h3>

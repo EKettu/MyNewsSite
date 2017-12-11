@@ -15,13 +15,13 @@ public class FileService {
 
     public FileObject createFile(MultipartFile file) throws IOException {
         FileObject fileObject = new FileObject();
-        if (file.getContentType().equals("image/png")) {
-            fileObject.setName(file.getOriginalFilename());
-            fileObject.setContentType(file.getContentType());
-            fileObject.setContentLength(file.getSize());
+      //  if (file.getContentType().equals("image/jpg") || file.getContentType().equals("image/jpeg") ) {
+//            fileObject.setName(file.getOriginalFilename());
+//            fileObject.setContentType(file.getContentType());
+//            fileObject.setContentLength(file.getSize());
             fileObject.setContent(file.getBytes());
             fileRepository.save(fileObject);
-        }
+     //   }
         return fileObject;
     }
 }

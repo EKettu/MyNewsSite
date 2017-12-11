@@ -53,7 +53,7 @@ public class NewsServiceTest {
         categoryRepository.deleteAll();
         newsRepository.deleteAll();
         String content = UUID.randomUUID().toString().substring(0, 6);
-        MockMultipartFile file = new MockMultipartFile("file", "aarrggghh.png", "image/png", content.getBytes());
+        MockMultipartFile file = new MockMultipartFile("file", "aarrggghh.jpg", "image/jpg", content.getBytes());
         newsItem = new NewsItem();
         newsItem.setTitle("Uutinen1");
         newsItem.setIngress("Ingressi");
@@ -61,12 +61,12 @@ public class NewsServiceTest {
         newsItem.setNewsDate(LocalDate.now());
         newsItem.setNewsTime(LocalDateTime.now());
         FileObject fileObject = new FileObject();
-        fileObject.setName(file.getOriginalFilename());
-        fileObject.setContentType(file.getContentType());
-        fileObject.setContentLength(file.getSize());
+//        fileObject.setName(file.getOriginalFilename());
+//        fileObject.setContentType(file.getContentType());
+//        fileObject.setContentLength(file.getSize());
         fileObject.setContent(file.getBytes());
         fileRepository.save(fileObject);
-       // newsItem.setPicture(fileObject);
+        newsItem.setPicture(fileObject);
 
         List<Author> authors = newsItem.getAuthors();
         Author author1 = new Author("Jokunen");

@@ -67,13 +67,6 @@ public class NewsController {
     @Autowired
     AuthorRepository authorRepository;
     
-//    public NewsController() {
-//        Category category1 = new Category("Kissat");
-//        categoryRepository.save(category1);
-//        Category category2 = new Category("Kasvit");
-//        categoryRepository.save(category2);
-//    }
-    
     /**
      * Method for showing news on the front page
      * @param model
@@ -88,15 +81,15 @@ public class NewsController {
         model.addAttribute("categories", categoryRepository.findAll());
         return "home";
     }
-
+    
     /**
      * Method for adding a NewsItem via a form
-     * @param title
-     * @param ingress
-     * @param newsText
-     * @param authors
-     * @param categories
-     * @param file
+     * @param title String, title of the NewsItem
+     * @param ingress String, ingress of the NewsItem
+     * @param newsText String, text of the NewsItem
+     * @param authors String [], names of the writer(s) of the NewsItem
+     * @param categories String [], categories of the NewsItem
+     * @param file, this would be the picture file if it would work... 
      * @return
      * @throws IOException 
      */
@@ -104,8 +97,8 @@ public class NewsController {
     public String addNews(@RequestParam String title,
             @RequestParam String ingress, @RequestParam String newsText,
             @RequestParam(value = "authors[]") String[] authors,
-            @RequestParam(value = "categories[]") String[] categories)
-          //  @RequestParam("file") MultipartFile file) throws IOException 
+            @RequestParam(value = "categories[]") String[] categories,
+           @RequestParam("file") MultipartFile file) throws IOException 
             {
 
         NewsItem newsItem = new NewsItem();
@@ -118,7 +111,7 @@ public class NewsController {
 
         newsItem.setAuthors(authorList);
         newsItem.setCategories(categoryList);
-      //  newsItem.setPicture(fileService.createFile(file));
+        newsItem.setPicture(fileService.createFile(file));
 
         newsRepository.save(newsItem);
         newsService.assignNewsItemToAuthors(newsItem, authorList);
@@ -126,7 +119,19 @@ public class NewsController {
 
         return "redirect:/";
     }
+    
+    //This was an attempt to get the Validiation to work
+    //    @PostMapping("/news")
+//    public String create(@Valid @ModelAttribute NewsItem newsItem, BindingResult bindingresult) {
+//        if(bindingresult.hasErrors()) {
+//            return "news";
+//        }
+//        newsRepository.save(newsItem);
+//        return "redirect:/";
+//    }
+    
 
+    
     /**
      * Method for displaying available authors and categories in the form
      * @param model
@@ -139,12 +144,7 @@ public class NewsController {
         return "news";
     }
 
-//    @PostMapping("/news")
-//    public String addNews(@Valid @ModelAttribute NewsItem newsItem) throws IOException {
-//
-//        newsRepository.save(newsItem);
-//        return "redirect:/";
-//    }
+
     /**
      * Method for showing an individual NewsItem, also shows a list of other news
      * in the same categories

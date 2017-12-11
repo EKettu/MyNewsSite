@@ -40,7 +40,7 @@
 
         <div>
             <h3>Add a new piece of news</h3>
-            <form action="/news" th:method="POST" enctype = "multipart/form-data" >
+            <form action="#" th:action="@{/news}" th:method="POST" enctype = "multipart/form-data" >
                 <div class="form-group">
                     <label for="title">Title</label>
                     <input type="text" class="form-control" name="title" id="title"/>
@@ -51,7 +51,7 @@
                 </div>
                 <div class="form-group">
                     <label for="newsText">Text</label>
-                    <textarea name="newsText" id="newsText" class="form-control"></textarea>
+                    <textarea name="newsText" id="newsText" class="form-control" ></textarea>
                 </div>
                 <div class="form-group">
                     <label for="categories">Categories (Hold down the Ctrl (windows) / Command (Mac) button to select multiple options.)</label>
@@ -69,11 +69,11 @@
                                 th:text="${author.name}">Authors</option>
                     </select>
                 </div>
-      <!--          <div class="form-group">
+             <div class="form-group">
                     <label for="picture">Add picture</label>
                     <input type="file" class="form-control" name="file" id="file"/>
                 </div>
-      -->
+      
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>
 

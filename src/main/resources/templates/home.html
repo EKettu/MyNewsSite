@@ -62,7 +62,7 @@
                 <a th:href="@{/newsItem/{newsItemId}(newsItemId=${newsItem.id})}" >
                     <span th:text="${newsItem.title + ' ' + newsItem.newsDate}">title and date</span><br/>
                     <span th:text="${newsItem.ingress}">title and date</span><br/>
-                <!--    <img th:src="@{/newsItem/{newsItemId}/content(newsItemId = ${newsItem.id})}"/><br/> -->
+                    <img th:src="@{/newsItem/{newsItemId}/content(newsItemId = ${newsItem.id})}"/><br/> 
                 </a> 
 
             </li>

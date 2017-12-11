@@ -42,7 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
         auth.inMemoryAuthentication()
-                .withUser("newsEditor").password("KuutitOvatLutuisia").roles("ADMIN");
+                .withUser("newsEditor").password("KuutitOvatLutuisia").roles("USER");
     }
 
     @Bean

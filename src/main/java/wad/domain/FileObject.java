@@ -10,15 +10,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+/**
+ * Unused class, would be used for adding picture files
+ * 
+ */
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
 public class FileObject extends AbstractPersistable<Long> {
 
-    private String name;
-    private String contentType;
-    private Long contentLength;
+//    private String name;
+//    private String contentType;
+//    private Long contentLength;
 
    @Lob
   //  @Basic(fetch = FetchType.EAGER)
