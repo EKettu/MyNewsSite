@@ -21,8 +21,9 @@ public class FileObject extends AbstractPersistable<Long> {
     private Long contentLength;
 
     @Lob
-    @Basic(fetch = FetchType.LAZY)
+    @Basic(fetch = FetchType.EAGER)
     private byte[] content;
+    
     @Id
     private Long id;
 
