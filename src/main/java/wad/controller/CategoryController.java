@@ -38,7 +38,7 @@ public class CategoryController {
     public String list(Model model) {
         model.addAttribute("categories", categoryRepository.findAll());
 
-        return "/categories";
+        return "categories";
     }
 
     /**

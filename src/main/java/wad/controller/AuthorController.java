@@ -29,7 +29,7 @@ public class AuthorController {
     public String list(Model model) {
         model.addAttribute("authors", authorRepository.findAll());
 
-        return "/authors";
+        return "authors";
     }
     
     /**
