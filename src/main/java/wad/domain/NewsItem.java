@@ -27,7 +27,7 @@ public class NewsItem extends AbstractPersistable<Long> {
     @Column(length = 500)
     private String ingress;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne
     private FileObject picture;
     
     @ManyToMany(mappedBy = "news")
