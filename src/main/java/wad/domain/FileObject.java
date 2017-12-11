@@ -20,7 +20,7 @@ public class FileObject extends AbstractPersistable<Long> {
     private String contentType;
     private Long contentLength;
 
-    @Lob
+    //@Lob
     @Basic(fetch = FetchType.EAGER)
     private byte[] content;
     

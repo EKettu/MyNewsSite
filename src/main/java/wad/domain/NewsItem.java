@@ -26,10 +26,6 @@ public class NewsItem extends AbstractPersistable<Long> {
     
     @Column(length = 500)
     private String ingress;
-//
-//    @ElementCollection
-//    @CollectionTable(name = "writers")
-//    private List<String> writers;
 
     @OneToOne(fetch = FetchType.EAGER)
     private FileObject picture;
