@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
- * Unused class, would be used for adding picture files
- * 
+ * Unused class, can be used for adding picture files in a local environment
+ *
  */
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,11 +23,10 @@ public class FileObject extends AbstractPersistable<Long> {
 //    private String name;
 //    private String contentType;
 //    private Long contentLength;
-
-   @Lob
-  //  @Basic(fetch = FetchType.EAGER)
+    @Lob
+    //  @Basic(fetch = FetchType.EAGER)
     private byte[] content;
-    
+
     @Id
     private Long id;
 

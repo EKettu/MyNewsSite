@@ -30,19 +30,19 @@ import wad.service.FileService;
 import wad.service.NewsService;
 
 /**
- *Class for managing listing and adding news
+ * Class for managing listing and adding news
  *
  */
 @Controller
 public class NewsController {
 
-       /**
+    /**
      * A repository for NewsItem objects
      */
     @Autowired
     private NewsRepository newsRepository;
 
-        /**
+    /**
      * A repository for Category objects
      */
     @Autowired
@@ -55,8 +55,8 @@ public class NewsController {
     FileService fileService;
 
     /**
-     * A service for managing adding NewsItems to Categories and Authors,
-     * also creates lists of NewsItems
+     * A service for managing adding NewsItems to Categories and Authors, also
+     * creates lists of NewsItems
      */
     @Autowired
     NewsService newsService;
@@ -66,40 +66,41 @@ public class NewsController {
      */
     @Autowired
     AuthorRepository authorRepository;
-    
+
     /**
      * Method for showing news on the front page
+     *
      * @param model
      * @return the front/home page
      */
     @GetMapping("/")
-    public String list(Model model) {    
+    public String list(Model model) {
         List<NewsItem> fiveNewest = newsService.getFiveNewestNews();
-        
+
         model.addAttribute("selectednews", fiveNewest);
-        model.addAttribute("oldernews", newsService.getOlderNews(fiveNewest));       
+        model.addAttribute("oldernews", newsService.getOlderNews(fiveNewest));
         model.addAttribute("categories", categoryRepository.findAll());
         return "home";
     }
-    
+
     /**
      * Method for adding a NewsItem via a form
+     *
      * @param title String, title of the NewsItem
      * @param ingress String, ingress of the NewsItem
      * @param newsText String, text of the NewsItem
      * @param authors String [], names of the writer(s) of the NewsItem
      * @param categories String [], categories of the NewsItem
-     * @param file, this would be the picture file if it would work... 
+     * @param file, this would be the picture file if it would work...
      * @return
-     * @throws IOException 
+     * @throws IOException
      */
     @PostMapping("/news")
     public String addNews(@RequestParam String title,
             @RequestParam String ingress, @RequestParam String newsText,
             @RequestParam(value = "authors[]") String[] authors,
-            @RequestParam(value = "categories[]") String[] categories,
-           @RequestParam("file") MultipartFile file) throws IOException 
-            {
+            @RequestParam(value = "categories[]") String[] categories) //    @RequestParam("file") MultipartFile file) throws IOException 
+    {
 
         NewsItem newsItem = new NewsItem();
         newsItem.setTitle(title);
@@ -111,7 +112,7 @@ public class NewsController {
 
         newsItem.setAuthors(authorList);
         newsItem.setCategories(categoryList);
-        newsItem.setPicture(fileService.createFile(file));
+        //  newsItem.setPicture(fileService.createFile(file));
 
         newsRepository.save(newsItem);
         newsService.assignNewsItemToAuthors(newsItem, authorList);
@@ -119,7 +120,7 @@ public class NewsController {
 
         return "redirect:/";
     }
-    
+
     //This was an attempt to get the Validiation to work
     //    @PostMapping("/news")
 //    public String create(@Valid @ModelAttribute NewsItem newsItem, BindingResult bindingresult) {
@@ -129,11 +130,9 @@ public class NewsController {
 //        newsRepository.save(newsItem);
 //        return "redirect:/";
 //    }
-    
-
-    
     /**
      * Method for displaying available authors and categories in the form
+     *
      * @param model
      * @return a page containing the form for adding news
      */
@@ -144,10 +143,10 @@ public class NewsController {
         return "news";
     }
 
-
     /**
-     * Method for showing an individual NewsItem, also shows a list of other news
-     * in the same categories
+     * Method for showing an individual NewsItem, also shows a list of other
+     * news in the same categories
+     *
      * @param model
      * @param newsItemId Long, id of the selected NewsItem
      * @return a page containing the selected NewsItem

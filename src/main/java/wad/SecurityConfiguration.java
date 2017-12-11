@@ -13,7 +13,7 @@ import wad.service.CustomUserDetailsService;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-    
+
     @Autowired
     CustomUserDetailsService userDetailsService;
 
@@ -33,7 +33,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/h2-console/*").permitAll();
-              //  .anyRequest().permitAll();
+        //  .anyRequest().permitAll();
         http.formLogin()
                 .permitAll();
     }

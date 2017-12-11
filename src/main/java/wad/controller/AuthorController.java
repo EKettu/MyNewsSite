@@ -8,9 +8,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import wad.domain.Author;
 import wad.repository.AuthorRepository;
+
 /**
  * Class for managing the authors of news articles
- * 
+ *
  */
 @Controller
 public class AuthorController {
@@ -20,8 +21,10 @@ public class AuthorController {
      */
     @Autowired
     AuthorRepository authorRepository;
+
     /**
      * Method for listing Author objects
+     *
      * @param model
      * @return a page with a list of authors
      */
@@ -31,10 +34,11 @@ public class AuthorController {
 
         return "authors";
     }
-    
+
     /**
      * Method for adding Author objects
-     * @param name String, name of the author 
+     *
+     * @param name String, name of the author
      * @return redirect to the home page
      */
     @PostMapping("/authors")

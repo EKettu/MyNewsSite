@@ -11,6 +11,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+/**
+ * Class for Author objects
+ *
+ */
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -21,6 +25,9 @@ public class Author extends AbstractPersistable<Long> {
     private Long id;
     private String name;
 
+    /**
+     * List containing NewsItems of this Author
+     */
     @ManyToMany(fetch = FetchType.EAGER)
     private List<NewsItem> news;
 
@@ -37,19 +44,25 @@ public class Author extends AbstractPersistable<Long> {
     }
 
     public List<NewsItem> getNews() {
-       if (this.news == null) {
-           this.news = new ArrayList<NewsItem>();
-       }
-       return this.news;
+        if (this.news == null) {
+            this.news = new ArrayList<NewsItem>();
+        }
+        return this.news;
     }
-    
+
     public void setNews(List<NewsItem> news) {
         this.news = news;
     }
-    
+
+    /**
+     * Method to make sure that a single NewsItem cannot be added twice to the
+     * same author
+     *
+     * @param newsItem
+     */
     public void addNewsItem(NewsItem newsItem) {
         for (NewsItem newsItem2 : getNews()) {
-            if(newsItem2.getId()== newsItem.getId()) {
+            if (newsItem2.getId() == newsItem.getId()) {
                 return;
             }
         }

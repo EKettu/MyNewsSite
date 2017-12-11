@@ -12,6 +12,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+/**
+ * Class for Category objects
+ *
+ */
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -20,9 +24,12 @@ public class Category extends AbstractPersistable<Long> {
 
     private String name;
 
+    /**
+     * List of NewsItems in this Category
+     */
     @ManyToMany(fetch = FetchType.EAGER)
     private List<NewsItem> news;
-    
+
     @Id
     private Long id;
 
@@ -41,6 +48,12 @@ public class Category extends AbstractPersistable<Long> {
         this.news = news;
     }
 
+    /**
+     * Method to make sure that a single NewsItem cannot be added twice to the
+     * same category
+     *
+     * @param newsItem
+     */
     public void addNewsItem(NewsItem newsItem) {
         for (NewsItem newsItem2 : getNews()) {
             if (newsItem2.getId() == newsItem.getId()) {

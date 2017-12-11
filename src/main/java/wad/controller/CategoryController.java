@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import wad.domain.Category;
 import wad.repository.CategoryRepository;
 import wad.repository.NewsRepository;
+
 /**
  * Class for managing news categories
- * 
+ *
  */
 @Controller
 public class CategoryController {
@@ -31,6 +32,7 @@ public class CategoryController {
 
     /**
      * Method for listing Category objects
+     *
      * @param model
      * @return a page with a list of categories
      */
@@ -43,6 +45,7 @@ public class CategoryController {
 
     /**
      * Method for adding Category objects
+     *
      * @param name String, name of the category
      * @return redirect to the home page
      */
@@ -52,9 +55,10 @@ public class CategoryController {
         categoryRepository.save(category);
         return "redirect:/";
     }
-    
+
     /**
      * Method for showing news in an individual category
+     *
      * @param model
      * @param categoryId Long, id of the selected category
      * @return a web page of the selected category

@@ -10,6 +10,10 @@ import org.springframework.stereotype.Service;
 import wad.domain.Account;
 import wad.repository.AccountRepository;
 
+/**
+ * Class for managing UserDetails
+ *
+ */
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 

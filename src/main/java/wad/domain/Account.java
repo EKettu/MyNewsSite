@@ -1,4 +1,3 @@
-
 package wad.domain;
 
 import javax.persistence.Entity;
@@ -8,16 +7,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+/**
+ * Class for Account objects
+ *
+ */
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
 public class Account extends AbstractPersistable<Long> {
-    
+
     String username;
-    
+
     String password;
-    
+
     @Id
     private Long id;
 
@@ -28,5 +31,5 @@ public class Account extends AbstractPersistable<Long> {
     public void setId(Long id) {
         this.id = id;
     }
-    
+
 }

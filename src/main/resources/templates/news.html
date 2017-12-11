@@ -17,7 +17,7 @@
                     <a class="navbar-brand" th:href="@{/}">NiceNewsSite</a>
                 </div>
                 <ul class="nav navbar-nav">
-                    <li class="active"><a th:href="@{/}">Home</a></li>
+                    <li><a th:href="@{/}">Home</a></li>
                     <li><a th:href="@{/news}">Add News</a></li>
                     <li><a th:href="@{/authors}">Add a new author</a></li>
                     <li><a th:href="@{/categories}">Add a new category</a></li>
@@ -69,11 +69,11 @@
                                 th:text="${author.name}">Authors</option>
                     </select>
                 </div>
-             <div class="form-group">
+  <!--           <div class="form-group">
                     <label for="picture">Add picture</label>
                     <input type="file" class="form-control" name="file" id="file"/>
                 </div>
-      
+      -->
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>
 

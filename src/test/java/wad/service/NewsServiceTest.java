@@ -66,7 +66,7 @@ public class NewsServiceTest {
 //        fileObject.setContentLength(file.getSize());
         fileObject.setContent(file.getBytes());
         fileRepository.save(fileObject);
-        newsItem.setPicture(fileObject);
+        //    newsItem.setPicture(fileObject);
 
         List<Author> authors = newsItem.getAuthors();
         Author author1 = new Author("Jokunen");
@@ -76,14 +76,12 @@ public class NewsServiceTest {
         newsItem.addAuthor(author1);
         newsItem.addAuthor(author2);
 
-
         //newsItem.setAuthors(authors);
-
         List<Category> categories = newsItem.getCategories();
         Category category = new Category("Luonto");
-          categoryRepository.save(category); 
-         newsItem.addCategory(category);
-   
+        categoryRepository.save(category);
+        newsItem.addCategory(category);
+
         newsItem.setCategories(categories);
         newsRepository.save(newsItem);
     }
@@ -159,7 +157,7 @@ public class NewsServiceTest {
         assertTrue(categoryRepository.findByName("Luonto").getNews().contains(newsItem));
         assertFalse(categoryRepository.findByName("Kissat").getNews().contains(newsItem));
     }
-
+//
 //    @Test
 //    public void testCreateOtherNewsList() throws IOException {
 //        String content = UUID.randomUUID().toString().substring(0, 6);
@@ -171,9 +169,9 @@ public class NewsServiceTest {
 //        newsItem2.setNewsDate(LocalDate.now());
 //        newsItem2.setNewsTime(LocalDateTime.now());
 //        FileObject fileObject = new FileObject();
-//        fileObject.setName(file.getOriginalFilename());
-//        fileObject.setContentType(file.getContentType());
-//        fileObject.setContentLength(file.getSize());
+////        fileObject.setName(file.getOriginalFilename());
+////        fileObject.setContentType(file.getContentType());
+////        fileObject.setContentLength(file.getSize());
 //        fileObject.setContent(file.getBytes());
 //        fileRepository.save(fileObject);
 //        newsItem2.setPicture(fileObject);
@@ -185,21 +183,11 @@ public class NewsServiceTest {
 //
 //        List<Category> categories = newsItem2.getCategories();
 //        Category category1 = categoryRepository.findByName("Luonto");
-//        System.out.println("Category1 on " + category1);
-//        System.out.println("Tässä kohtaa Luonto kategorian news on " + category1.getNews());
-//                categoryRepository.save(category1);
+//       // categoryRepository.save(category1);
 //        newsItem2.addCategory(category1);
-//
 //        newsItem2.setCategories(categories);
-//
-//
-//        System.out.println("Kategoria nimeltä Luonto tässä kohtaa " + categoryRepository.findByName("Luonto"));
 //        newsRepository.save(newsItem2);
 //
-//        System.out.println("newsRepossa on " + newsRepository.findAll());
-//        System.out.println("NewsItem2 is " + newsItem2);
-//
-//        System.out.println("NewsItemin kategoriat ovat " + newsItem.getCategories());
 //
 //        newsService.assignNewsItemToCategories(newsItem2, categories);
 //        newsService.assignNewsItemToCategories(newsItem, categories);
@@ -208,7 +196,6 @@ public class NewsServiceTest {
 //        categoryRepository.save(category1);
 //
 //        List<NewsItem> otherNews = newsService.createOtherNewsList(newsItem);
-//        System.out.println("Other News sisältää " + otherNews);
 //        assertTrue(newsService.createOtherNewsList(newsItem).contains(newsItem2));
 //        assertFalse(newsService.createOtherNewsList(newsItem).contains(newsItem));
 //

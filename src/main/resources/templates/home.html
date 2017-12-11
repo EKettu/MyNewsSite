@@ -47,14 +47,6 @@
             </div>
         </nav>
 
-  <!--          <h1>Hello NewsSite!</h1>
-
-    <h2>Some links (unnecessary)</h2>
-
-        <a th:href="@{/news}">Add a new piece of news</a><br/>
-        <a th:href="@{/authors}">Add a new author</a><br/>
-        <a th:href="@{/categories}">Add a new category</a><br/>
--->
         <h1>Latest news</h1>
 
         <ul>
@@ -62,7 +54,7 @@
                 <a th:href="@{/newsItem/{newsItemId}(newsItemId=${newsItem.id})}" >
                     <span th:text="${newsItem.title + ' ' + newsItem.newsDate}">title and date</span><br/>
                     <span th:text="${newsItem.ingress}">title and date</span><br/>
-                    <img th:src="@{/newsItem/{newsItemId}/content(newsItemId = ${newsItem.id})}"/><br/> 
+                    <!--          <img th:src="@{/newsItem/{newsItemId}/content(newsItemId = ${newsItem.id})}"/><br/> -->
                 </a> 
 
             </li>
